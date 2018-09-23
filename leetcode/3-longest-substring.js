@@ -7,7 +7,7 @@
  * @param {string} s
  * @return {number}
  */
-var lengthOfLongestSubstring = function(s) {
+function lengthOfLongestSubstring(s) {
   let left = 0;
   let right = 0;
 
@@ -15,7 +15,7 @@ var lengthOfLongestSubstring = function(s) {
   let seenChars = new Set();
 
   while (left < s.length && right < s.length) {
-    console.log(seenChars);
+    // console.log(seenChars);
     if (seenChars.has(s[right])) {
       seenChars.delete(s[left])
       left++;
@@ -28,4 +28,6 @@ var lengthOfLongestSubstring = function(s) {
   return maxLength;
 };
 
-lengthOfLongestSubstring('abcabcbb');
+// lengthOfLongestSubstring('abcabcbb');
+
+module.exports = lengthOfLongestSubstring;
