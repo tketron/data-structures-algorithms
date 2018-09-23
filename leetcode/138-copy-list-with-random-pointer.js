@@ -19,17 +19,42 @@ function RandomListNode(label) {
  * @return {RandomListNode}
  */
 var copyRandomList = function(head) {
-  var newHead = copyNode(head);
+  let nodes = new Map();
 
-  function copyNode(node) {
-    if (node === null) return null;
-    var nodeCopy = new RandomListNode(node.label);
-    nodeCopy.next = copyNode(node.next);
-    nodeCopy.random = copyNode(node.random);
-    return nodeCopy;
+  let node = head;
+
+  // iterate through linked list in order
+  while (node !== null) {
+    nodes.set(node, new RandomListNode(node.label));
+    node = node.next;
   }
 
+  node = head;
+  let newHead = nodes.get(node);
+  let newNode = newHead;
+
+  while (node !== null) {
+    newNode.next = nodes.get(node.next);
+    newNode.random = nodes.get(node.random);
+    node = node.next;
+    newNode = nodes.get(node);
+  }
+
+  console.log(nodes);
+
   return newHead;
+
+  // var newHead = copyNode(head);
+
+  // function copyNode(node) {
+  //   if (node === null) return null;
+  //   var nodeCopy = new RandomListNode(node.label);
+  //   nodeCopy.next = copyNode(node.next);
+  //   nodeCopy.random = copyNode(node.random);
+  //   return nodeCopy;
+  // }
+
+  // return newHead;
 };
 
 var node1 = new RandomListNode(1);
@@ -45,5 +70,3 @@ node2.random = node1;
 node4.random = node2;
 
 copyRandomList(node1);
-
-
